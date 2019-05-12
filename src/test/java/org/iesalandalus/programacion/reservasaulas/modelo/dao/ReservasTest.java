@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.modelo.dao;
-/*
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -20,9 +20,9 @@ import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Pe
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Tramo;
 import org.junit.Test;
-*/
+
 public class ReservasTest {
-/*	
+	
 	private static final String NOMBRE_PROFESOR1 = "José Ramón";
 	private static final String NOMBRE_PROFESOR2 = "Andrés";
 	private static final String CORREO = "a@b.cc";
@@ -451,5 +451,5 @@ public class ReservasTest {
 			assertEquals("No se puede consultar la disponibilidad de una permanencia nula.", e.getMessage());
 		}
 	}
-*/
+
 }

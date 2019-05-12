@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.modelo.dao;
-/*
+
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.reservasaulas.modelo.dao.Aulas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.junit.Test;
-*/
+
 public class AulasTest {
-/*	
+	
 	private static final String NOMBRE_AULA1 = "Aula 1";
 	private static final String NOMBRE_AULA2 = "Aula 2";
 	private static final String NOMBRE_SALON = "Salón de actos";
@@ -245,5 +245,5 @@ public class AulasTest {
 		assertEquals(aula2.toString(), representacion.get(1));
 		assertEquals(salon.toString(), representacion.get(2));
 	}
-*/
+
 }

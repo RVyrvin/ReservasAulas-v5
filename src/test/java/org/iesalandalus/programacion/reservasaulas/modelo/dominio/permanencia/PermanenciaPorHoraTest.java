@@ -1,5 +1,5 @@
 package org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia;
-/*
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.Test;
-*/
+
 public class PermanenciaPorHoraTest {
-/*	
+	
 	private static final String ERROR_EXCEPCION = "Debería haber saltado la excepción.";
 	private static final String ERROR_NO_EXCEPCION = "No debería haber saltado la excepción.";
 	
@@ -88,7 +88,7 @@ public class PermanenciaPorHoraTest {
 			LocalTime hora = null;
 			permanencia = new PermanenciaPorHora(DIA_LD, hora);
 			fail(ERROR_EXCEPCION);
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			assertEquals("La hora de una permanencia no puede ser nula.", e.getMessage());
 			assertNull(permanencia);
 		}
@@ -96,7 +96,7 @@ public class PermanenciaPorHoraTest {
 			String hora = null;
 			permanencia = new PermanenciaPorHora(DIA_LD, hora);
 			fail(ERROR_EXCEPCION);
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			assertEquals("La hora de una permanencia no puede ser nula.", e.getMessage());
 			assertNull(permanencia);
 		}
@@ -104,7 +104,7 @@ public class PermanenciaPorHoraTest {
 			LocalDate dia = null;
 			permanencia = new PermanenciaPorHora(dia, HORA_LT);
 			fail(ERROR_EXCEPCION);
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			assertEquals("El día de una permanencia no puede ser nulo.", e.getMessage());
 			assertNull(permanencia);
 		}
@@ -112,7 +112,7 @@ public class PermanenciaPorHoraTest {
 			String dia = null;
 			permanencia = new PermanenciaPorHora(dia, HORA_LT);
 			fail(ERROR_EXCEPCION);
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			assertEquals("El día de una permanencia no puede ser nulo.", e.getMessage());
 			assertNull(permanencia);
 		}
@@ -200,7 +200,7 @@ public class PermanenciaPorHoraTest {
 		try {
 			otraPermanencia = new PermanenciaPorHora(null);
 			fail(ERROR_EXCEPCION);
-		} catch (IllegalArgumentException e) {
+		} catch (NullPointerException e) {
 			assertEquals("No se puede copiar una permanencia nula.", e.getMessage());
 			assertNull(otraPermanencia);
 		}
@@ -241,5 +241,5 @@ public class PermanenciaPorHoraTest {
 	public void toStringTest() {
 		assertEquals("[dia=01/12/2018, hora=10:00]", PERMANENCIA.toString());
 	}
-*/
+
 }
