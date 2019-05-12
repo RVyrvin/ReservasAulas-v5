@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas.ControladorVentanaPrincipal">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="640.0" style="-fx-background-color: #cccccc;">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem fx:id="menuSalir" mnemonicParsing="false" text="Salir" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Aulas" />
+                  <MenuItem mnemonicParsing="false" text="Clientes" />
+                  <MenuItem mnemonicParsing="false" text="Permanencia" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Ayuda">
+            <items>
+              <MenuItem fx:id="menuAcercaDE" mnemonicParsing="false" text="Acerca de" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <VBox alignment="TOP_CENTER" prefHeight="426.0" prefWidth="630.0">
+         <children>
+            <HBox prefHeight="142.0" prefWidth="640.0">
+               <children>
+                  <Pane prefHeight="125.0" prefWidth="260.0">
+                     <children>
+                        <RadioButton layoutX="22.0" layoutY="37.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Aulas" />
+                        <RadioButton layoutX="22.0" layoutY="62.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Profesores" />
+                        <RadioButton layoutX="22.0" layoutY="85.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Permanencias" />
+                        <Label contentDisplay="CENTER" layoutX="86.0" prefHeight="30.0" prefWidth="84.0" text="Selector">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="123.0" prefWidth="381.0">
+                     <children>
+                        <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Cargar" />
+                        <Button layoutX="141.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Añadir" />
+                        <Button layoutX="267.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Buscar" />
+                        <Label contentDisplay="CENTER" layoutX="139.0" layoutY="-1.0" prefHeight="30.0" prefWidth="84.0" text="Acciónes">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <TableView prefHeight="323.0" prefWidth="640.0">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </TableView>
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>
