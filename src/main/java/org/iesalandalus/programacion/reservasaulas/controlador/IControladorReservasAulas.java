@@ -24,6 +24,8 @@ public interface IControladorReservasAulas {
 	Aula buscarAula(Aula aula);
 
 	List<String> representarAulas();
+	
+	List<Aula> getAulas();
 
 	// profesores
 

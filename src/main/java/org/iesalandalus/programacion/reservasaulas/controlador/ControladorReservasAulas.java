@@ -60,6 +60,11 @@ public class ControladorReservasAulas implements IControladorReservasAulas {
 		return modelo.representarAulas();
 	}
 	
+	//v4
+	@Override
+	public List<Aula> getAulas(){
+		return modelo.getAulas();
+	}
 
 	// profesores
 	@Override

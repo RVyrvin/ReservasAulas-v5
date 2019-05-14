@@ -12,19 +12,19 @@
         <menus>
           <Menu mnemonicParsing="false" text="Archivo">
             <items>
-              <MenuItem fx:id="menuSalir" mnemonicParsing="false" text="Salir" />
+              <MenuItem fx:id="miSalir" mnemonicParsing="false" onAction="#miSalir" text="Salir" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
-                <MenuItem mnemonicParsing="false" text="Aulas" />
-                  <MenuItem mnemonicParsing="false" text="Clientes" />
-                  <MenuItem mnemonicParsing="false" text="Permanencia" />
+                <MenuItem fx:id="miAulas" mnemonicParsing="false" text="Aulas" />
+                  <MenuItem fx:id="miClientes" mnemonicParsing="false" text="Clientes" />
+                  <MenuItem fx:id="miReservas" mnemonicParsing="false" text="Reservas" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
             <items>
-              <MenuItem fx:id="menuAcercaDE" mnemonicParsing="false" text="Acerca de" />
+              <MenuItem fx:id="miAcercaDe" mnemonicParsing="false" onAction="#miAcercaDe" text="Acerca de" />
             </items>
           </Menu>
         </menus>
@@ -33,36 +33,51 @@
          <children>
             <HBox prefHeight="142.0" prefWidth="640.0">
                <children>
-                  <Pane prefHeight="125.0" prefWidth="260.0">
+                  <Pane prefHeight="120.0" prefWidth="182.0">
                      <children>
-                        <RadioButton layoutX="22.0" layoutY="37.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Aulas" />
-                        <RadioButton layoutX="22.0" layoutY="62.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Profesores" />
-                        <RadioButton layoutX="22.0" layoutY="85.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Permanencias" />
-                        <Label contentDisplay="CENTER" layoutX="86.0" prefHeight="30.0" prefWidth="84.0" text="Selector">
+                        <RadioButton fx:id="rbtnAulas" layoutX="22.0" layoutY="37.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Aulas" />
+                        <RadioButton fx:id="rbtnProfsores" layoutX="22.0" layoutY="62.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Profesores" />
+                        <RadioButton fx:id="rbtnReservas" layoutX="22.0" layoutY="85.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Reservas" />
+                        <Label contentDisplay="CENTER" layoutX="43.0" layoutY="-1.0" prefHeight="30.0" prefWidth="84.0" text="Selector">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
-                  <Pane prefHeight="123.0" prefWidth="381.0">
+                  <Pane prefHeight="120.0" prefWidth="491.0">
                      <children>
-                        <Button layoutX="14.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Cargar" />
-                        <Button layoutX="141.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Añadir" />
-                        <Button layoutX="267.0" layoutY="60.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Buscar" />
-                        <Label contentDisplay="CENTER" layoutX="139.0" layoutY="-1.0" prefHeight="30.0" prefWidth="84.0" text="Acciónes">
+                        <Button fx:id="btnCargar" layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickBtnCargar" prefHeight="25.0" prefWidth="100.0" text="Cargar" />
+                        <Button fx:id="btnAnadir" layoutX="14.0" layoutY="73.0" mnemonicParsing="false" onAction="#onClickBtnAnadir" prefHeight="25.0" prefWidth="100.0" text="Añadir" />
+                        <Button fx:id="btnBorrar" layoutX="131.0" layoutY="73.0" mnemonicParsing="false" onAction="#onClickBtnBorrar" prefHeight="25.0" prefWidth="100.0" text="Borrar" />
+                        <Label contentDisplay="CENTER" layoutX="79.0" layoutY="-1.0" prefHeight="30.0" prefWidth="84.0" text="Acciónes">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <Button fx:id="btnReservas" layoutX="131.0" layoutY="35.0" mnemonicParsing="false" onAction="#onClickBtnReservas" prefHeight="25.0" prefWidth="100.0" text="Reservas" />
+                        <Button fx:id="btnDisponibilidad" layoutX="250.0" layoutY="73.0" mnemonicParsing="false" onAction="#onClickBtnDisp" prefHeight="25.0" prefWidth="100.0" text="Disponibilidad" />
+                        <ComboBox fx:id="cbTipo" layoutX="367.0" layoutY="35.0" onAction="#cbTipoSelected" prefHeight="25.0" prefWidth="100.0" promptText="Tipo" />
+                        <ComboBox fx:id="cbValores" layoutX="367.0" layoutY="73.0" prefHeight="25.0" prefWidth="100.0" promptText="Valores" />
+                        <DatePicker fx:id="dpData" layoutX="244.0" layoutY="35.0" prefHeight="25.0" prefWidth="111.0" />
                      </children>
                   </Pane>
                </children>
             </HBox>
-            <TableView prefHeight="323.0" prefWidth="640.0">
+            <TableView fx:id="tvTabla" prefHeight="323.0" prefWidth="640.0">
                <padding>
                   <Insets left="10.0" right="10.0" top="10.0" />
                </padding>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem fx:id="miContextTabla" mnemonicParsing="false" text="Unspecified Action" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
          <padding>
