@@ -1,14 +1,6 @@
 package org.iesalandalus.programacion.reservasaulas.vista.uigrafica;
 
-import java.util.List;
-
-import javax.naming.OperationNotSupportedException;
-
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.vista.IVistaReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas.ControladorVentanaPrincipal;
 import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.utilidades.Dialogos;
@@ -16,16 +8,12 @@ import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.utilidades.Di
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class VistaReservasAulas extends Application implements IVistaReservasAulas {
-
-	private static final String ERROR = "ERROR: ";
-	// private static final String NOMBRE_VALIDO = "\\w+";
-	private static final String CORREO_VALIDO = "good@mail.com";
+	
 
 	// private IControladorReservasAulas controlador;
 
