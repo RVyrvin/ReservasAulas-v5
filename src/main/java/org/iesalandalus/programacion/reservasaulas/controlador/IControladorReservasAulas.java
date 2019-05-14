@@ -36,6 +36,8 @@ public interface IControladorReservasAulas {
 	Profesor buscarProfesor(Profesor profesor);
 
 	List<String> representarProfesores();
+	
+	List<Profesor> getProfesores();
 
 	// reservas
 

@@ -1,7 +1,7 @@
 package org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas;
 
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.utilidades.Dialogos;
 
 import javafx.event.ActionEvent;
@@ -10,13 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ControladorAddAula {
+public class ControladorAddProfesor {
+
+	@FXML
+	private TextField tfCorreo;
 
 	@FXML
 	private TextField tfNombre;
 
 	@FXML
-	private TextField tfPuestos;
+	private TextField tfTelefono;
 
 	@FXML
 	private Button btnAnadir;
@@ -29,14 +32,26 @@ public class ControladorAddAula {
 
 	@FXML
 	void onClickBtnAnadir(ActionEvent event) {
+
 		try {
-			Aula aula = new Aula(tfNombre.getText(), Integer.parseInt(tfPuestos.getText()));
-			controladorMVC.insertarAula(aula);
+			
+			Profesor profesor;
+			
+			if (tfTelefono.getText().trim().equals("")) {
+				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText(), null);
+			} else {
+				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText(), tfTelefono.getText());
+			}
+			
+			controladorMVC.insertarProfesor(profesor);
+			
 			Stage propietario = ((Stage) btnAnadir.getScene().getWindow());
-			Dialogos.mostrarDialogoInformacion("Añadir Aula", "Aula se ha añadido satisfactoriamente", propietario);
+			Dialogos.mostrarDialogoInformacion("Añadir Profesor", "Profesor se ha añadido satisfactoriamente",
+					propietario);
 		} catch (Exception e) {
-			Dialogos.mostrarDialogoError("Añadir cliente", e.getMessage());
+			Dialogos.mostrarDialogoError("Añadir Profesor", e.getMessage());
 		}
+
 	}
 
 }

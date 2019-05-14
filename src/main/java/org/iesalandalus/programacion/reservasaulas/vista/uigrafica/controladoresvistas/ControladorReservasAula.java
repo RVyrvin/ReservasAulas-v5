@@ -3,7 +3,6 @@ package org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladore
 import java.util.List;
 
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.dao.Reservas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.utilidades.Dialogos;

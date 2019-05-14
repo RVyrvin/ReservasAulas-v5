@@ -35,9 +35,8 @@ public class ControladorReservasAulas implements IControladorReservasAulas {
 		modelo.escribirAulas();
 		modelo.escribirProfesores();
 		modelo.escribirReservas();
-		//vista.salir();
+		// vista.salir();
 	}
-	
 
 	// aulas
 	@Override
@@ -59,10 +58,10 @@ public class ControladorReservasAulas implements IControladorReservasAulas {
 	public List<String> representarAulas() {
 		return modelo.representarAulas();
 	}
-	
-	//v4
+
+	// v4
 	@Override
-	public List<Aula> getAulas(){
+	public List<Aula> getAulas() {
 		return modelo.getAulas();
 	}
 
@@ -86,7 +85,12 @@ public class ControladorReservasAulas implements IControladorReservasAulas {
 	public List<String> representarProfesores() {
 		return modelo.representarProfesores();
 	}
-	
+
+	// v4
+	@Override
+	public List<Profesor> getProfesores() {
+		return modelo.getProfesores();
+	}
 
 	// reservas
 	@Override

@@ -100,7 +100,7 @@ public class ControladorVentanaPrincipal {
 	private RadioButton rbtnAulas;
 
 	private IControladorReservasAulas controladorMVC;
-	private Stage addAula;
+	private Stage stage;
 
 	public ControladorVentanaPrincipal() {
 		// init();
@@ -226,12 +226,15 @@ public class ControladorVentanaPrincipal {
 		// columnaTelefono.setMinWidth(100);
 		columnaTelefono.setCellValueFactory(new PropertyValueFactory<Object, String>("Telefono"));
 
-		ObservableList<Object> profesores = FXCollections.observableArrayList(new Profesor("Pepito", "correo@mail.com"),
-				new Profesor("Bob", "Bob@mail.com", "633655699"), new Profesor("Juan", "Juan@mail.com", "633655699"),
-				new Profesor("Perico", "Perico@mail.com", "633655699"),
-				new Profesor("Juana", "Juana@mail.com", "633655699"));
+		List<Profesor> profesores = controladorMVC.getProfesores();
 
-		tvTabla.setItems(profesores);
+		ObservableList<Object> olProfesores = FXCollections.observableArrayList();
+
+		for (Profesor p : profesores) {
+			olProfesores.add(p);
+		}
+
+		tvTabla.setItems(olProfesores);
 
 	}
 
@@ -289,26 +292,54 @@ public class ControladorVentanaPrincipal {
 			}
 		}
 
+		if (rbtnProfsores.isSelected()) {
+			try {
+				addProfesor();
+				cargarProfesores();
+			} catch (Exception e) {
+				Dialogos.mostrarDialogoError("Ventana principal", e.getMessage());
+			}
+		}
+
+	}
+
+	private void addProfesor() throws Exception {
+		// if (addAula == null) {
+
+		stage = new Stage();
+
+		FXMLLoader cargador = new FXMLLoader(getClass().getResource("../vistas/AddProfesor.fxml"));
+
+		VBox raiz = cargador.load();
+		ControladorAddProfesor contr = cargador.getController();
+		contr.setControladorMVC(controladorMVC);
+
+		Scene escena = new Scene(raiz);
+		stage.setTitle("Añadir profesor");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(escena);
+		stage.showAndWait();
+		// }
+
 	}
 
 	private void addAula() throws Exception {
 
 		// if (addAula == null) {
 
-		addAula = new Stage();
+		stage = new Stage();
 
-		FXMLLoader cargadorAddAula = new FXMLLoader(getClass().getResource("../vistas/AddAula.fxml"));
+		FXMLLoader cargador = new FXMLLoader(getClass().getResource("../vistas/AddAula.fxml"));
 
-		VBox raizAddAula = cargadorAddAula.load();
-		ControladorAddAula cAddAula = cargadorAddAula.getController();
-		cAddAula.setControladorMVC(controladorMVC);
+		VBox raiz = cargador.load();
+		ControladorAddAula cont = cargador.getController();
+		cont.setControladorMVC(controladorMVC);
 
-		Scene escenaAddAula = new Scene(raizAddAula);
-		addAula.setTitle("Añadir aula");
-		addAula.initModality(Modality.APPLICATION_MODAL);
-		addAula.setScene(escenaAddAula);
-		addAula.showAndWait();
-		System.out.println("!!!");
+		Scene escenaAddAula = new Scene(raiz);
+		stage.setTitle("Añadir aula");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(escenaAddAula);
+		stage.showAndWait();
 		// }
 	}
 
@@ -322,11 +353,28 @@ public class ControladorVentanaPrincipal {
 					controladorMVC.borrarAula(aula);
 					Dialogos.mostrarDialogoInformacion("Borrar Aula", "La aula se ha borrado satisfactoriamente");
 					cargarAulas();
-				}else {
-					Dialogos.mostrarDialogoError("Error al borrar la aula", "Para borrar hace falta selecciónar una aula en la tabla");
+				} else {
+					Dialogos.mostrarDialogoError("Error al borrar la aula",
+							"Para borrar hace falta selecciónar una aula en la tabla");
 				}
 			} catch (OperationNotSupportedException e) {
 				Dialogos.mostrarDialogoError("Error al borrar la aula", e.getMessage());
+			}
+		}
+		
+		if (rbtnProfsores.isSelected()) {
+			try {
+				Profesor profesor = (Profesor) tvTabla.getSelectionModel().getSelectedItem();
+				if (profesor != null) {
+					controladorMVC.borrarProfesor(profesor);
+					Dialogos.mostrarDialogoInformacion("Borrar Profesor", "El profesor se ha borrado satisfactoriamente");
+					cargarProfesores();
+				} else {
+					Dialogos.mostrarDialogoError("Error al borrar el profesor",
+							"Para borrar hace falta selecciónar un profesor en la tabla");
+				}
+			} catch (OperationNotSupportedException e) {
+				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
 			}
 		}
 
@@ -339,15 +387,44 @@ public class ControladorVentanaPrincipal {
 			try {
 				mostrarReservasAula();
 			} catch (Exception e) {
-				Dialogos.mostrarDialogoError("Error al mostrar reservas de aula", e.getMessage());
+				Dialogos.mostrarDialogoError("Error al mostrar reservas de la aula", e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		
+		if (rbtnProfsores.isSelected()) {
+			try {
+				mostrarReservasProfesor();
+			} catch (Exception e) {
+				Dialogos.mostrarDialogoError("Error al mostrar reservas del profesor", e.getMessage());
 				e.printStackTrace();
 			}
 		}
 
 	}
 
+	private void mostrarReservasProfesor() throws Exception {
+
+		stage = new Stage();
+
+		FXMLLoader cargador = new FXMLLoader(getClass().getResource("../vistas/ReservasProfesor.fxml"));
+
+		VBox raiz = cargador.load();
+		ControladorReservasProfesor contr = cargador.getController();
+		contr.setControladorMVC(controladorMVC);
+		contr.init();
+
+		Scene escena = new Scene(raiz);
+		stage.setTitle("Añadir aula");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(escena);
+		stage.showAndWait();
+		
+	}
+
 	private void mostrarReservasAula() throws Exception {
-		addAula = new Stage();
+		
+		stage = new Stage();
 
 		FXMLLoader cargador = new FXMLLoader(getClass().getResource("../vistas/ReservasAula.fxml"));
 
@@ -357,12 +434,13 @@ public class ControladorVentanaPrincipal {
 		contr.init();
 
 		Scene escena = new Scene(raiz);
-		addAula.setTitle("Añadir aula");
-		addAula.initModality(Modality.APPLICATION_MODAL);
-		addAula.setScene(escena);
-		addAula.showAndWait();
+		stage.setTitle("Añadir aula");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(escena);
+		stage.showAndWait();
 
 	}
+	
 
 	@FXML
 	void onClickBtnDisp(ActionEvent event) {
