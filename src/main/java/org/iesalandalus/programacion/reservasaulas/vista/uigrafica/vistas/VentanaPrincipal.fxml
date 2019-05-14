@@ -17,9 +17,9 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Edit">
               <items>
-                <MenuItem fx:id="miAulas" mnemonicParsing="false" text="Aulas" />
-                  <MenuItem fx:id="miClientes" mnemonicParsing="false" text="Clientes" />
-                  <MenuItem fx:id="miReservas" mnemonicParsing="false" text="Reservas" />
+                <MenuItem fx:id="miAulas" mnemonicParsing="false" onAction="#miAulasAction" text="Aulas" />
+                  <MenuItem fx:id="miProfesores" mnemonicParsing="false" onAction="#miProfesoresAction" text="Profesores" />
+                  <MenuItem fx:id="miReservas" mnemonicParsing="false" onAction="#miReservasAction" text="Reservas" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Ayuda">
@@ -35,9 +35,9 @@
                <children>
                   <Pane prefHeight="120.0" prefWidth="182.0">
                      <children>
-                        <RadioButton fx:id="rbtnAulas" layoutX="22.0" layoutY="37.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Aulas" />
-                        <RadioButton fx:id="rbtnProfsores" layoutX="22.0" layoutY="62.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Profesores" />
-                        <RadioButton fx:id="rbtnReservas" layoutX="22.0" layoutY="85.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="125.0" text="Reservas" />
+                        <RadioButton fx:id="rbtnAulas" layoutX="22.0" layoutY="37.0" mnemonicParsing="false" onAction="#rbtnAulasAction" prefHeight="20.0" prefWidth="125.0" text="Aulas" />
+                        <RadioButton fx:id="rbtnProfsores" layoutX="22.0" layoutY="62.0" mnemonicParsing="false" onAction="#rbtnProfesoresAction" prefHeight="20.0" prefWidth="125.0" text="Profesores" />
+                        <RadioButton fx:id="rbtnReservas" layoutX="22.0" layoutY="85.0" mnemonicParsing="false" onAction="#rbtnReservasAction" prefHeight="20.0" prefWidth="125.0" text="Reservas" />
                         <Label contentDisplay="CENTER" layoutX="43.0" layoutY="-1.0" prefHeight="30.0" prefWidth="84.0" text="Selector">
                            <font>
                               <Font size="20.0" />

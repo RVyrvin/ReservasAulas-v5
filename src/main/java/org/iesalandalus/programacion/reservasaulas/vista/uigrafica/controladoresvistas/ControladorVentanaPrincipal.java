@@ -1,23 +1,19 @@
 package org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.dao.Reservas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Permanencia;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.PermanenciaPorHora;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.PermanenciaPorTramo;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Tramo;
 import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.utilidades.Dialogos;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,13 +37,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class ControladorVentanaPrincipal {
 
@@ -67,7 +59,16 @@ public class ControladorVentanaPrincipal {
 	private RadioButton rbtnReservas;
 
 	@FXML
+	private Button btnAnadir;
+
+	@FXML
 	private Button btnCargar;
+
+	@FXML
+	private Button btnReservas;
+
+	@FXML
+	private Button btnDisponibilidad;
 
 	@FXML
 	private MenuItem miAulas;
@@ -85,16 +86,10 @@ public class ControladorVentanaPrincipal {
 	private MenuItem miSalir;
 
 	@FXML
-	private Button btnAnadir;
-
-	@FXML
 	private MenuItem miReservas;
 
 	@FXML
 	private RadioButton rbtnProfsores;
-
-	@FXML
-	private Button btnBuscar;
 
 	@FXML
 	private RadioButton rbtnAulas;
@@ -265,18 +260,15 @@ public class ControladorVentanaPrincipal {
 		// columnaPermanenciaTipo.setCellValueFactory(new PropertyValueFactory<Object,
 		// String>("Tipo"));
 
-		ObservableList<Object> reservas = FXCollections.observableArrayList(
-				new Reserva(new Profesor("Roman", "roman@mail.com", "666999888"), new Aula("Sala", 20),
-						new PermanenciaPorTramo("01/12/2028", Tramo.TARDE)),
-				// new Profesor("Bob", "Bob@mail.com", "633655699"),
-				// new Profesor("Juan", "Juan@mail.com", "633655699"),
-				// new Profesor("Perico", "Perico@mail.com", "633655699"),
-				new Reserva(new Profesor("Romaaan", "roman@mail.com", "666999888"), new Aula("Salaaa", 20),
-						new PermanenciaPorTramo("01/12/2028", Tramo.MANANA)));
+		List<Reserva> reservas = controladorMVC.getReservas();
 
-		tvTabla.setItems(reservas);
+		ObservableList<Object> olReservas = FXCollections.observableArrayList();
 
-		System.out.println("Reservas");
+		for (Reserva r : reservas) {
+			olReservas.add(r);
+		}
+
+		tvTabla.setItems(olReservas);
 
 	}
 
@@ -300,6 +292,36 @@ public class ControladorVentanaPrincipal {
 				Dialogos.mostrarDialogoError("Ventana principal", e.getMessage());
 			}
 		}
+
+		if (rbtnReservas.isSelected()) {
+			try {
+				addReserva();
+				cargarReservas();
+			} catch (Exception e) {
+				Dialogos.mostrarDialogoError("Ventana principal", e.getMessage());
+			}
+		}
+
+	}
+
+	private void addReserva() throws Exception {
+		// if (addAula == null) {
+
+		stage = new Stage();
+
+		FXMLLoader cargador = new FXMLLoader(getClass().getResource("../vistas/AddReserva.fxml"));
+
+		VBox raiz = cargador.load();
+		ControladorAddReserva contr = cargador.getController();
+		contr.setControladorMVC(controladorMVC);
+		contr.init();
+
+		Scene escena = new Scene(raiz);
+		stage.setTitle("Añadir reserva");
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(escena);
+		stage.showAndWait();
+		// }
 
 	}
 
@@ -361,17 +383,34 @@ public class ControladorVentanaPrincipal {
 				Dialogos.mostrarDialogoError("Error al borrar la aula", e.getMessage());
 			}
 		}
-		
+
 		if (rbtnProfsores.isSelected()) {
 			try {
 				Profesor profesor = (Profesor) tvTabla.getSelectionModel().getSelectedItem();
 				if (profesor != null) {
 					controladorMVC.borrarProfesor(profesor);
-					Dialogos.mostrarDialogoInformacion("Borrar Profesor", "El profesor se ha borrado satisfactoriamente");
+					Dialogos.mostrarDialogoInformacion("Borrar Profesor",
+							"El profesor se ha borrado satisfactoriamente");
 					cargarProfesores();
 				} else {
 					Dialogos.mostrarDialogoError("Error al borrar el profesor",
 							"Para borrar hace falta selecciónar un profesor en la tabla");
+				}
+			} catch (OperationNotSupportedException e) {
+				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
+			}
+		}
+
+		if (rbtnReservas.isSelected()) {
+			try {
+				Reserva reserva = (Reserva) tvTabla.getSelectionModel().getSelectedItem();
+				if (reserva != null) {
+					controladorMVC.anularReserva(reserva);
+					Dialogos.mostrarDialogoInformacion("Anular Reserva", "La reserva fue anulada satisfactoriamente");
+					cargarReservas();
+				} else {
+					Dialogos.mostrarDialogoError("Error al anular la reserva",
+							"Para anular la reserva hace falta seleccionar una en la tabla");
 				}
 			} catch (OperationNotSupportedException e) {
 				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
@@ -391,7 +430,7 @@ public class ControladorVentanaPrincipal {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (rbtnProfsores.isSelected()) {
 			try {
 				mostrarReservasProfesor();
@@ -419,11 +458,11 @@ public class ControladorVentanaPrincipal {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(escena);
 		stage.showAndWait();
-		
+
 	}
 
 	private void mostrarReservasAula() throws Exception {
-		
+
 		stage = new Stage();
 
 		FXMLLoader cargador = new FXMLLoader(getClass().getResource("../vistas/ReservasAula.fxml"));
@@ -440,7 +479,6 @@ public class ControladorVentanaPrincipal {
 		stage.showAndWait();
 
 	}
-	
 
 	@FXML
 	void onClickBtnDisp(ActionEvent event) {
@@ -490,5 +528,65 @@ public class ControladorVentanaPrincipal {
 			System.out.println("Tramo");
 			cbValores.setItems(FXCollections.observableArrayList("Mañana", "Tarde"));
 		}
+	}
+
+	@FXML
+	void rbtnAulasAction(ActionEvent event) {
+		aulaDis();
+	}
+
+	@FXML
+	void rbtnProfesoresAction(ActionEvent event) {
+		profesorDis();
+	}
+
+	@FXML
+	void rbtnReservasAction(ActionEvent event) {
+		reservasDis();
+	}
+
+	@FXML
+	void miAulasAction(ActionEvent event) {
+		rbtnAulas.setSelected(true);
+		aulaDis();
+		cargarAulas();
+	}
+
+	@FXML
+	void miProfesoresAction(ActionEvent event) {
+		rbtnProfsores.setSelected(true);
+		profesorDis();
+		cargarProfesores();
+	}
+
+	@FXML
+	void miReservasAction(ActionEvent event) {
+		rbtnReservas.setSelected(true);
+		reservasDis();
+		cargarReservas();
+	}
+
+	private void aulaDis() {
+		btnReservas.setDisable(false);
+		btnDisponibilidad.setDisable(false);
+		dpData.setDisable(false);
+		cbTipo.setDisable(false);
+		cbValores.setDisable(false);
+	}
+
+	private void profesorDis() {
+		btnReservas.setDisable(false);
+		btnDisponibilidad.setDisable(true);
+		dpData.setDisable(true);
+		cbTipo.setDisable(true);
+		cbValores.setDisable(true);
+	}
+	
+	private void reservasDis() {
+		btnReservas.setDisable(true);
+		btnDisponibilidad.setDisable(true);
+		dpData.setDisable(true);
+		cbTipo.setDisable(true);
+		cbValores.setDisable(true);
 	}
 }

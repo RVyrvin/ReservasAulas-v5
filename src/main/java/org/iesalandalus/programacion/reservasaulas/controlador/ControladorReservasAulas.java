@@ -127,4 +127,10 @@ public class ControladorReservasAulas implements IControladorReservasAulas {
 	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) {
 		return modelo.consultarDisponibilidad(aula, permanencia);
 	}
+
+	// v4
+	@Override
+	public List<Reserva> getReservas() {
+		return modelo.getReservas();
+	}
 }

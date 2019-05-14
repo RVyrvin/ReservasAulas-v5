@@ -3,7 +3,6 @@ package org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladore
 import java.util.List;
 
 import org.iesalandalus.programacion.reservasaulas.controlador.IControladorReservasAulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.vista.uigrafica.utilidades.Dialogos;
@@ -18,7 +17,7 @@ import javafx.scene.control.TextArea;
 
 public class ControladorReservasProfesor {
 
-	List<Profesor> profesores;
+	private List<Profesor> profesores;
 
 	@FXML
 	private Button btnMostrarReservas;

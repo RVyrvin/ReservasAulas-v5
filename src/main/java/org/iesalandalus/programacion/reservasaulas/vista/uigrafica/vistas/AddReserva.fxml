@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas.ControladorAddReserva">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="295.0" prefWidth="300.0" style="-fx-background-color: eeeeee;">
+         <children>
+            <Button fx:id="btnAnadir" layoutX="115.0" layoutY="247.0" mnemonicParsing="false" onAction="#onClickBtnAnadir" prefHeight="25.0" prefWidth="70.0" text="Añadir" />
+            <Label layoutX="32.0" layoutY="14.0" prefHeight="25.0" prefWidth="60.0" text="Profesor" />
+            <Label layoutX="32.0" layoutY="57.0" prefHeight="25.0" prefWidth="60.0" text="Aula" />
+            <Label layoutX="32.0" layoutY="100.0" prefHeight="25.0" prefWidth="60.0" text="Dia" />
+            <ComboBox fx:id="cbProfesores" layoutX="126.0" layoutY="14.0" prefWidth="150.0" />
+            <ComboBox fx:id="cbAulas" layoutX="126.0" layoutY="57.0" prefWidth="150.0" />
+            <DatePicker fx:id="dpDate" layoutX="126.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
+            <Label layoutX="32.0" layoutY="148.0" prefHeight="25.0" prefWidth="60.0" text="Tipo" />
+            <ComboBox fx:id="cbTipo" layoutX="126.0" layoutY="148.0" onAction="#cbTipoSelected" prefWidth="150.0" />
+            <Label layoutX="32.0" layoutY="194.0" prefHeight="25.0" prefWidth="60.0" text="Valor" />
+            <ComboBox fx:id="cbValores" layoutX="126.0" layoutY="194.0" prefWidth="150.0" />
+         </children>
+      </AnchorPane>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
