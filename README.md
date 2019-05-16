@@ -2,36 +2,46 @@
 ## Profesor: José Ramón Jiménez Reyes
 ## Alumno: Roman Vyrvin
 
-Desde el IES Al-Ándalus nos acaban de dar unos nuevos requisitos a aplicar sobre la última versión que le mostramos y que les gustó bastante. Lo que nos piden es lo siguiente:
 
-- Quieren conservar la interfaz de texto de la aplicación.
-- Quieren también tener una nueva interfaz de usuario gráfica para ejecutar la aplicación.
+El cliente nos acaba de dar unos nuevos requisitos a aplicar sobre la última versión que le mostramos y que le gustó bastante. Lo que nos pide el cliente es lo siguiente:
 
-Tu tarea consiste en dotar a la aplicación de la tarea anterior de una interfaz gráfica de usuario, utilizando JavaFX. La interfaz se puede diseñar al gusto de cada un@, pero deberá utilizar los componentes más adecuados en cada caso. Cuanto más elaborada esté mayor será la calificación. Para ello debes emplear los diferentes tipos de controles, menús y contenedores que nos proporciona la API de JavaFX. Se pide al menos:
+- Que la aplicación no almacene los datos en ficheros y que lo haga en una base de datos creada para tal efecto.
 
-- Un menú que nos permita salir de la aplicación, o acceder a las diferentes opciones sobre aulas, profesores y reservas.
-- La gestión de aulas permitirá añadir una nueva, borrar una ya existente, mostrar todas las aulas, mostrar las reservas de un aula o consultar su disponibilidad.
-- La gestión de profesores permitirá añadir uno nuevo, borrar uno ya existente y mostrar todos los profesores. También permitirá mostrar las reservas de un profesor.
-- La gestión de reservas nos permitirá realizar una nueva reserva o anular una reserva dada. También permitirá mostrar todas las reservas.
 
-He subido a GitHub un esqueleto de proyecto gradle que ya lleva incluidos todos los test necesarios que el programa debe pasar. Dichos test están todos comentados y deberás ir descomentándolos conforme vayas avanzando con la tarea. La URL del repositorios es en la que te encuentras.
+Los datos de la BD, que es una BD MongoDB, son los siguientes:
 
-Por tanto, tu tarea va a consistir en completar los siguientes apartados:
+- Servidor: 35.180.192.242
+- Puerto: 27017
+- BD: reservasaulas-XXX, donde XXX es el usuario de correo que me mandaste en el foro.
+- Usuario: usuario de correo que me mandaste en el foro.
+- Contraseña: La que te he enviado por medio de mensaje en la plataforma.
 
-1. Lo primero que debes hacer es realizar un fork del repositorio donde he colocado el proyecto gradle con la estructura del proyecto y todos los test necesarios.
-2. Clona tu repositorio remoto recién copiado en github a un repositorio local que será donde irás realizando lo que a continuación se te pide. Añade tu nombre al fichero `README.md` en el apartado "Alumno". Realiza tu primer commit.
-3. Mueve la interfaz textual al paquete adecuado y renombra la aplicación que utilizaba dicha interfaz textual. Realiza un commit.
-4. Crea un nuevo paquete para la vista gráfica. Crea una nueva aplicación que haga uso de dicha interfaz gráfica de usuario y que contenga el menú adecuado. Realiza un commit.
-5. Realiza la gestión de aulas tal y como se indica anteriormente. Realiza un commit.
-6. Realiza la gestión de profesores tal y como se indica anteriormente. Realiza un commit.
+
+Tu tarea consiste en dotar a la aplicación de la tarea anterior de un nuevo modelo de datos que en vez de utilizar ficheros para almacenar los datos lo haga haciendo uso de una Base de Datos NoSQL. 
+Se pide al menos:
+
+- Acomodar el proyecto para que gradle gestione la dependencia con el driver para java de MongoDB en su última vesión. Además deberás modificar el proyecto para que se puedan ejecutar todas las versiones:              ficheros con IU textual, ficheros con IU gráfica, BD con IU textual y BD con IU gráfica.
+- Gestionar las aulas para que su persistencia se lleve a cabo por medio de dicha BD.
+- Gestionar los profesores para que su persistencia se lleve a cabo por medio de icha BD.
+- Gestionar las reservas para que su persistencia se lleve a cabo por medio de dicha BD.
+
+
+Para ello debes realizar las siguientes acciones:
+
+1. Lo primero que debes hacer es crear un repositorio  en GitHub a partir de tu repositorio de la tarea anterior.
+2. Clona dicho repositorio localmente para empezar a modicfiarlo. Modifica el fichero README.md para que indique tus datos y los de esta tarea. Realiza tu primer commit.
+3. Realiza los cambios necesarios para que el proyecto pueda contener cuatro aplicaciones diferentes: ficheros con IU textual, ficheros con IU gráfica, BD con IU textual y BD con IU gráfica. Haz un commit.
+4. Haz que la gestión de aulas utilice la persistencia en la BD. Haz un commit.
+5. Haz que la gestión de profesores utilice la persistencia en la BD. Haz un commit.
+6. Haz que la gestión de reservas utilice la persistencia en la BD. Haz un commit.
 7. Realiza la gestión de reservas tal y como se indica anteriormente. Realiza un commit.
-8. Al final debes tener dos aplicaciones que utilicen el mismo modelo, pero que una utilice la interfaz textual y otra la interfaz gráfica. Realiza un commit y sube los cambios a tu repositorio remoto.
+
 
 ###### Se valorará:
+
 - La nomenclatura del repositorio de GitHub y del archivo entregado sigue las indicaciones de entrega.
 - La indentación debe ser correcta en cada uno de los apartados.
 - El nombre de las variables debe ser adecuado.
-- Se debe utilizar la clase `Entrada` para realizar la entrada por teclado.
 - El proyecto debe pasar todas las pruebas que van en el esqueleto del mismo y toda entrada del programa será validada para evitar que el programa termine abruptamente debido a una excepción.
 - Se deben utilizar los comentarios adecuados.
 - Se valorará la corrección ortográfica tanto en los comentarios como en los mensajes que se muestren al usuario.
