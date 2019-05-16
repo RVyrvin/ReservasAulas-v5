@@ -1,17 +1,18 @@
-package org.iesalandalus.programacion.reservasaulas.modelo;
+package org.iesalandalus.programacion.reservasaulas.modelo.mongodb;
+
 
 import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.reservasaulas.modelo.dao.Aulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.dao.Profesores;
-import org.iesalandalus.programacion.reservasaulas.modelo.dao.Reservas;
-
+import org.iesalandalus.programacion.reservasaulas.modelo.IModeloReservasAulas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Permanencia;
+import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Aulas;
+import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Profesores;
+import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Reservas;
 
 public class ModeloReservasAulas implements IModeloReservasAulas {
 
@@ -173,3 +174,4 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 		reservas.escribir();
 	}
 }
+

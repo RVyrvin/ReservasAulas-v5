@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
-import org.iesalandalus.programacion.reservasaulas.modelo.dao.Aulas;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
+import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Aulas;
 import org.junit.Test;
 
 public class AulasTest {

@@ -5,9 +5,11 @@ import java.io.Serializable;
 public class Aula implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private static final float PUNTOS_POR_PUESTO = 0.5f;
 	private static final int MIN_PUESTOS = 10;
 	private static final int MAX_PUESTOS = 100;
+	
 	private String nombre;
 	private int puestos;
 

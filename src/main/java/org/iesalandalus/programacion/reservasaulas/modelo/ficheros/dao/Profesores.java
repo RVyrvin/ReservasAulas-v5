@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.reservasaulas.modelo.dao;
+package org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao;
 
 import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
