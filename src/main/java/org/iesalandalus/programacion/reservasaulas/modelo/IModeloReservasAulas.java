@@ -69,8 +69,4 @@ public interface IModeloReservasAulas {
 
 	boolean consultarDisponibilidad(Aula aula, Permanencia permanencia);
 
-	void leerReservas();
-
-	void escribirReservas();
-
 }

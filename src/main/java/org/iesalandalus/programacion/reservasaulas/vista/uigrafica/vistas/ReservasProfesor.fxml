@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="269.0" prefWidth="417.0" spacing="5.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas.ControladorReservasProfesor">
+<VBox prefHeight="269.0" prefWidth="417.0" spacing="5.0" style="-fx-background-color: fafafa; -fx-border-color: aaaaaa; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.iesalandalus.programacion.reservasaulas.vista.uigrafica.controladoresvistas.ControladorReservasProfesor">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="420.0">
          <children>

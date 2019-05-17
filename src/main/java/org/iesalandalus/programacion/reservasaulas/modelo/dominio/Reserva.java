@@ -93,6 +93,5 @@ public class Reserva implements Serializable {
 			return false;
 		Reserva other = (Reserva) obj;
 		return Objects.equals(aula, other.aula) && Objects.equals(permanencia, other.permanencia);
-		// && Objects.equals(profesor, other.profesor);
 	}
 }

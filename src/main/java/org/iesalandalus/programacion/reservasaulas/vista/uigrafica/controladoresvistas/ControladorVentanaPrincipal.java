@@ -53,16 +53,7 @@ public class ControladorVentanaPrincipal {
 	private ComboBox<String> cbValores;
 
 	@FXML
-	private MenuItem miClientes;
-
-	@FXML
-	private RadioButton rbtnReservas;
-
-	@FXML
 	private Button btnAnadir;
-
-	@FXML
-	private Button btnCargar;
 
 	@FXML
 	private Button btnReservas;
@@ -71,7 +62,16 @@ public class ControladorVentanaPrincipal {
 	private Button btnDisponibilidad;
 
 	@FXML
+	private MenuItem miSalir;
+
+	@FXML
 	private MenuItem miAulas;
+
+	@FXML
+	private MenuItem miClientes;
+
+	@FXML
+	private MenuItem miReservas;
 
 	@FXML
 	private MenuItem miAcercaDe;
@@ -80,25 +80,28 @@ public class ControladorVentanaPrincipal {
 	private MenuItem miContextTabla;
 
 	@FXML
-	private TableView<Object> tvTabla;
+	private MenuItem miContextMostrarReservas;
 
 	@FXML
-	private MenuItem miSalir;
+	private MenuItem miContextBorrar;
 
 	@FXML
-	private MenuItem miReservas;
+	private RadioButton rbtnAulas;
 
 	@FXML
 	private RadioButton rbtnProfsores;
 
 	@FXML
-	private RadioButton rbtnAulas;
+	private RadioButton rbtnReservas;
+
+	@FXML
+	private TableView<Object> tvTabla;
 
 	private IControladorReservasAulas controladorMVC;
+
 	private Stage stage;
 
 	public ControladorVentanaPrincipal() {
-		// init();
 	}
 
 	public void init() {
@@ -109,10 +112,11 @@ public class ControladorVentanaPrincipal {
 		rbtnProfsores.setToggleGroup(tvSelector);
 		rbtnReservas.setToggleGroup(tvSelector);
 		rbtnAulas.setSelected(true);
+		cargarAulas();
 
 		cbTipo.setItems(FXCollections.observableArrayList("Hora", "Tramo"));
-
-		// btnCargar.setOnAction(e -> onClickBtnCargar(e));
+		miContextMostrarReservas.setVisible(false);
+		miContextMostrarReservas.setDisable(true);
 
 	}
 
@@ -153,21 +157,6 @@ public class ControladorVentanaPrincipal {
 			controladorMVC.salir();
 			System.exit(0);
 		}
-	}
-
-	@FXML
-	void onClickBtnCargar(ActionEvent event) {
-
-		if (rbtnAulas.isSelected()) {
-			cargarAulas();
-		}
-		if (rbtnProfsores.isSelected()) {
-			cargarProfesores();
-		}
-		if (rbtnReservas.isSelected()) {
-			cargarReservas();
-		}
-
 	}
 
 	private void cargarAulas() {
@@ -237,27 +226,18 @@ public class ControladorVentanaPrincipal {
 		TableColumn<Object, String> columnaProfesor = new TableColumn<Object, String>("Profesor");
 		TableColumn<Object, String> columnaAula = new TableColumn<Object, String>("Aula");
 		TableColumn<Object, String> columnaDia = new TableColumn<Object, String>("Fecha");
-		// TableColumn<Object, String> columnaPermanenciaTipo = new TableColumn<Object,
-		// String>("Hora/Tramo");
 
 		tvTabla.getColumns().clear();
 
 		tvTabla.getColumns().add(columnaProfesor);
 		tvTabla.getColumns().add(columnaAula);
 		tvTabla.getColumns().add(columnaDia);
-		// tvTabla.getColumns().add(columnaPermanenciaTipo);
 
 		tvTabla.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		// columnaNombreProfesor.setMinWidth(100);
 		columnaProfesor.setCellValueFactory(new PropertyValueFactory<Object, String>("profesor"));
-		// columnaNombreAula.setMinWidth(100);
 		columnaAula.setCellValueFactory(new PropertyValueFactory<Object, String>("Aula"));
-		// columnaPermanenciaDia.setMinWidth(100);
 		columnaDia.setCellValueFactory(new PropertyValueFactory<Object, String>("Permanencia"));
-		// columnaPermanenciaTipo.setMinWidth(100);
-		// columnaPermanenciaTipo.setCellValueFactory(new PropertyValueFactory<Object,
-		// String>("Tipo"));
 
 		List<Reserva> reservas = controladorMVC.getReservas();
 
@@ -304,7 +284,6 @@ public class ControladorVentanaPrincipal {
 	}
 
 	private void addReserva() throws Exception {
-		// if (addAula == null) {
 
 		stage = new Stage();
 
@@ -320,12 +299,10 @@ public class ControladorVentanaPrincipal {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(escena);
 		stage.showAndWait();
-		// }
 
 	}
 
 	private void addProfesor() throws Exception {
-		// if (addAula == null) {
 
 		stage = new Stage();
 
@@ -340,13 +317,10 @@ public class ControladorVentanaPrincipal {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(escena);
 		stage.showAndWait();
-		// }
 
 	}
 
 	private void addAula() throws Exception {
-
-		// if (addAula == null) {
 
 		stage = new Stage();
 
@@ -361,61 +335,6 @@ public class ControladorVentanaPrincipal {
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(escenaAddAula);
 		stage.showAndWait();
-		// }
-	}
-
-	@FXML
-	void onClickBtnBorrar(ActionEvent event) {
-
-		if (rbtnAulas.isSelected()) {
-			try {
-				Aula aula = (Aula) tvTabla.getSelectionModel().getSelectedItem();
-				if (aula != null) {
-					controladorMVC.borrarAula(aula);
-					Dialogos.mostrarDialogoInformacion("Borrar Aula", "La aula se ha borrado satisfactoriamente");
-					cargarAulas();
-				} else {
-					Dialogos.mostrarDialogoError("Error al borrar la aula",
-							"Para borrar hace falta selecciónar una aula en la tabla");
-				}
-			} catch (OperationNotSupportedException e) {
-				Dialogos.mostrarDialogoError("Error al borrar la aula", e.getMessage());
-			}
-		}
-
-		if (rbtnProfsores.isSelected()) {
-			try {
-				Profesor profesor = (Profesor) tvTabla.getSelectionModel().getSelectedItem();
-				if (profesor != null) {
-					controladorMVC.borrarProfesor(profesor);
-					Dialogos.mostrarDialogoInformacion("Borrar Profesor",
-							"El profesor se ha borrado satisfactoriamente");
-					cargarProfesores();
-				} else {
-					Dialogos.mostrarDialogoError("Error al borrar el profesor",
-							"Para borrar hace falta selecciónar un profesor en la tabla");
-				}
-			} catch (OperationNotSupportedException e) {
-				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
-			}
-		}
-
-		if (rbtnReservas.isSelected()) {
-			try {
-				Reserva reserva = (Reserva) tvTabla.getSelectionModel().getSelectedItem();
-				if (reserva != null) {
-					controladorMVC.anularReserva(reserva);
-					Dialogos.mostrarDialogoInformacion("Anular Reserva", "La reserva fue anulada satisfactoriamente");
-					cargarReservas();
-				} else {
-					Dialogos.mostrarDialogoError("Error al anular la reserva",
-							"Para anular la reserva hace falta seleccionar una en la tabla");
-				}
-			} catch (OperationNotSupportedException e) {
-				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
-			}
-		}
-
 	}
 
 	@FXML
@@ -531,16 +450,19 @@ public class ControladorVentanaPrincipal {
 	@FXML
 	void rbtnAulasAction(ActionEvent event) {
 		aulaDis();
+		cargarAulas();
 	}
 
 	@FXML
 	void rbtnProfesoresAction(ActionEvent event) {
 		profesorDis();
+		cargarProfesores();
 	}
 
 	@FXML
 	void rbtnReservasAction(ActionEvent event) {
 		reservasDis();
+		cargarReservas();
 	}
 
 	@FXML
@@ -564,12 +486,73 @@ public class ControladorVentanaPrincipal {
 		cargarReservas();
 	}
 
+	@FXML
+	void OnActionMiContextBorrar(ActionEvent event) {
+
+		if (rbtnAulas.isSelected()) {
+			try {
+				Aula aula = (Aula) tvTabla.getSelectionModel().getSelectedItem();
+				if (aula != null) {
+					controladorMVC.borrarAula(aula);
+					Dialogos.mostrarDialogoInformacion("Borrar Aula", "La aula se ha borrado satisfactoriamente");
+					cargarAulas();
+				} else {
+					Dialogos.mostrarDialogoError("Error al borrar la aula",
+							"Para borrar hace falta selecciónar una aula en la tabla");
+				}
+			} catch (OperationNotSupportedException e) {
+				Dialogos.mostrarDialogoError("Error al borrar la aula", e.getMessage());
+			}
+		}
+
+		if (rbtnProfsores.isSelected()) {
+			try {
+				Profesor profesor = (Profesor) tvTabla.getSelectionModel().getSelectedItem();
+				if (profesor != null) {
+					controladorMVC.borrarProfesor(profesor);
+					Dialogos.mostrarDialogoInformacion("Borrar Profesor",
+							"El profesor se ha borrado satisfactoriamente");
+					cargarProfesores();
+				} else {
+					Dialogos.mostrarDialogoError("Error al borrar el profesor",
+							"Para borrar hace falta selecciónar un profesor en la tabla");
+				}
+			} catch (OperationNotSupportedException e) {
+				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
+			}
+		}
+
+		if (rbtnReservas.isSelected()) {
+			try {
+				Reserva reserva = (Reserva) tvTabla.getSelectionModel().getSelectedItem();
+				if (reserva != null) {
+					controladorMVC.anularReserva(reserva);
+					Dialogos.mostrarDialogoInformacion("Anular Reserva", "La reserva fue anulada satisfactoriamente");
+					cargarReservas();
+				} else {
+					Dialogos.mostrarDialogoError("Error al anular la reserva",
+							"Para anular la reserva hace falta seleccionar una en la tabla");
+				}
+			} catch (OperationNotSupportedException e) {
+				Dialogos.mostrarDialogoError("Error al borrar el profesor", e.getMessage());
+			}
+		}
+
+	}
+
+	@FXML
+	void OnActionContextMiMostrarReservas(ActionEvent event) {
+
+	}
+
 	private void aulaDis() {
 		btnReservas.setDisable(false);
 		btnDisponibilidad.setDisable(false);
 		dpData.setDisable(false);
 		cbTipo.setDisable(false);
 		cbValores.setDisable(false);
+		miContextMostrarReservas.setVisible(false);
+
 	}
 
 	private void profesorDis() {
@@ -578,13 +561,16 @@ public class ControladorVentanaPrincipal {
 		dpData.setDisable(true);
 		cbTipo.setDisable(true);
 		cbValores.setDisable(true);
+		miContextMostrarReservas.setVisible(false);
+
 	}
-	
+
 	private void reservasDis() {
 		btnReservas.setDisable(true);
 		btnDisponibilidad.setDisable(true);
 		dpData.setDisable(true);
 		cbTipo.setDisable(true);
 		cbValores.setDisable(true);
+		miContextMostrarReservas.setVisible(false);
 	}
 }

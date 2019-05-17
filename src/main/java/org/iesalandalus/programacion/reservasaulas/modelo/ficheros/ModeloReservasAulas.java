@@ -157,13 +157,4 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 		return reservas.consultarDisponibilidad(aula, permanencia);
 	}
 
-	@Override
-	public void leerReservas() {
-		reservas.leer();
-	}
-
-	@Override
-	public void escribirReservas() {
-		reservas.escribir();
-	}
 }

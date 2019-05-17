@@ -152,16 +152,7 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 	@Override
 	public boolean consultarDisponibilidad(Aula aula, Permanencia permanencia) {
 		return reservas.consultarDisponibilidad(aula, permanencia);
-	}
-	
-	@Override
-	public void leerReservas() {
-		reservas.leer();
-	}
-	
-	@Override
-	public void escribirReservas() {
-		reservas.escribir();
-	}
+	}	
+
 }
 

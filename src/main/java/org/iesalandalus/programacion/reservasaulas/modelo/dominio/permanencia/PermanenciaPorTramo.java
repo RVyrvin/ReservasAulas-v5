@@ -19,6 +19,16 @@ public class PermanenciaPorTramo extends Permanencia implements Serializable {
 		setTramo(tramo);
 	}
 
+	public PermanenciaPorTramo(LocalDate dia, String tramo) {
+		super(dia);
+		setTramo(tramo);
+	}
+
+	public PermanenciaPorTramo(String dia, String tramo) {
+		super(dia);
+		setTramo(tramo);
+	}
+
 	public PermanenciaPorTramo(PermanenciaPorTramo permanenciaPorTramo) {
 		super(permanenciaPorTramo);
 		setTramo(permanenciaPorTramo.getTramo());
@@ -32,6 +42,17 @@ public class PermanenciaPorTramo extends Permanencia implements Serializable {
 		if (tramo == null)
 			throw new NullPointerException("El tramo de una permanencia no puede ser nulo.");
 		this.tramo = tramo;
+	}
+
+	private void setTramo(String tramo) {
+		if (tramo == null)
+			throw new NullPointerException("El tramo de una permanencia no puede ser nulo.");
+		if (tramo.equals("Mañana"))
+			this.tramo = Tramo.MANANA;
+		else if (tramo.equals("Tarde"))
+			this.tramo = Tramo.TARDE;
+		else
+			throw new IllegalArgumentException("Tramo puede ser sólo o 'Mañana' o 'Tarde'");
 	}
 
 	@Override
