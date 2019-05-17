@@ -67,19 +67,7 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 	@Override
 	public void borrarAula(Aula aula) throws OperationNotSupportedException {
 		aulas.borrar(aula);
-	}
-	/*
-	@Override
-	public void leerAulas() {
-		aulas.leer();
-	}
-	
-	@Override
-	public void escribirAulas() {
-		aulas.escribir();
-	}
-	*/
-	
+	}	
 	
 	// profesores
 
@@ -111,16 +99,6 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 	@Override
 	public void borrarProfesor(Profesor profesor) throws OperationNotSupportedException {
 		profesores.borrar(profesor);
-	}
-	
-	@Override
-	public void leerProfesores() {
-		profesores.leer();		
-	}
-	
-	@Override
-	public void escribirProfesores() {
-		profesores.escribir();		
 	}
 	
 	

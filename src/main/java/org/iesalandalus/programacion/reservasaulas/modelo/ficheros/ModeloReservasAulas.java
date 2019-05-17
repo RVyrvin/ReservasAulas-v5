@@ -70,17 +70,6 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 		aulas.borrar(aula);
 	}
 
-	/*
-	@Override
-	public void leerAulas() {
-		aulas.leer();
-	}
-
-	@Override
-	public void escribirAulas() {
-		aulas.escribir();
-	}
-	*/
 
 	// profesores
 
@@ -114,15 +103,7 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 		profesores.borrar(profesor);
 	}
 
-	@Override
-	public void leerProfesores() {
-		profesores.leer();
-	}
 
-	@Override
-	public void escribirProfesores() {
-		profesores.escribir();
-	}
 
 	// reservas
 

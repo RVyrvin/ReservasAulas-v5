@@ -28,9 +28,8 @@ public interface IModeloReservasAulas {
 
 	void borrarAula(Aula aula) throws OperationNotSupportedException;
 
-	//void leerAulas();
 
-	//void escribirAulas();
+	
 
 	// profesores
 
@@ -46,9 +45,7 @@ public interface IModeloReservasAulas {
 
 	void borrarProfesor(Profesor profesor) throws OperationNotSupportedException;
 
-	void leerProfesores();
 
-	void escribirProfesores();
 
 	// reservas
 

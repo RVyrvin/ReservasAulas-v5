@@ -105,67 +105,65 @@ public class MongoDB {
 		}
 	}
 
+	// aulas
 	public static Document obtenerDocumentoDesdeAula(Aula aula) {
-		
+
 		if (aula == null)
 			return null;
-		
-		Document dAula = new Document()
-				.append(AULA_NOMBRE, aula.getNombre())
-				.append(AULA_PUESTOS, aula.getPuestos());
-		
+
+		Document dAula = new Document().append(AULA_NOMBRE, aula.getNombre()).append(AULA_PUESTOS, aula.getPuestos());
+
 		return dAula;
-		
+
 	}
 
 	public static Aula obtenerAulaDesdaDocumento(Document documentoAula) {
-		
+
 		if (documentoAula == null)
 			return null;
-		
+
 		Document dAula = (Document) documentoAula;
 		String nombre = dAula.getString(AULA_NOMBRE);
 		int puestos = dAula.getInteger(AULA_PUESTOS);
-		
+
 		return new Aula(nombre, puestos);
 	}
 
-	/*
-	 * 
-	 * public static Document obtenerDocumentoDesdeCliente(Cliente cliente) { if
-	 * (cliente == null) { return null; } DatosPersonales datosPersonales =
-	 * cliente.getDatosPersonales(); Document dDatosPersonales = new Document()
-	 * .append(NOMBRE, datosPersonales.getNombre()) .append(APELLIDOS,
-	 * datosPersonales.getApellidos()) .append(DNI, datosPersonales.getDni())
-	 * .append(FECHA_NACIMIENTO,
-	 * datosPersonales.getFechaNacimiento().format(FORMATO_DIA)); DatosContacto
-	 * datosContacto = cliente.getDatosContacto(); DireccionPostal direccionPostal =
-	 * datosContacto.getDireccionPostal(); Document dDireccionPostal = new
-	 * Document() .append(DIRECCION, direccionPostal.getDireccion())
-	 * .append(LOCALIDAD, direccionPostal.getLocalidad()) .append(CODIGO_POSTAL,
-	 * direccionPostal.getCodigoPostal()); Document dDatosContacto = new Document()
-	 * .append(CORREO, datosContacto.getCorreo()) .append(TELEFONO,
-	 * datosContacto.getTelefono()) .append(DIRECCION_POSTAL, dDireccionPostal);
-	 * return new Document() .append(DATOS_CONTACTO, dDatosContacto)
-	 * .append(DATOS_PERSONALES, dDatosPersonales); }
-	 * 
-	 * public static Cliente obtenerClienteDesdeDocumento(Document documentoCliente)
-	 * { if (documentoCliente == null) { return null; } Document dDatosPersonales =
-	 * (Document) documentoCliente.get(DATOS_PERSONALES); String nombre =
-	 * dDatosPersonales.getString(NOMBRE); String apellidos =
-	 * dDatosPersonales.getString(APELLIDOS); String dni =
-	 * dDatosPersonales.getString(DNI); String fechaNacimiento =
-	 * dDatosPersonales.getString(FECHA_NACIMIENTO); DatosPersonales datosPersonales
-	 * = new DatosPersonales(nombre, apellidos, dni, fechaNacimiento); Document
-	 * dDatosContacto = (Document) documentoCliente.get(DATOS_CONTACTO); String
-	 * correo = dDatosContacto.getString(CORREO); String telefono =
-	 * dDatosContacto.getString(TELEFONO); Document dDireccionPostal = (Document)
-	 * dDatosContacto.get(DIRECCION_POSTAL); String direccion =
-	 * dDireccionPostal.getString(DIRECCION); String localidad =
-	 * dDireccionPostal.getString(LOCALIDAD); String codigoPostal =
-	 * dDireccionPostal.getString(CODIGO_POSTAL); DireccionPostal direccionPostal =
-	 * new DireccionPostal(direccion, localidad, codigoPostal); DatosContacto
-	 * datosContacto = new DatosContacto(telefono, correo, direccionPostal); return
-	 * new Cliente(datosPersonales, datosContacto); }
-	 */
+	// profesores
+
+	public static Document obtenerDocumentoDesdeProfesor(Profesor profesor) {
+		
+		if (profesor == null)
+			return null;
+		
+		Document dProfesor;
+		
+		if (profesor.getTelefono() == null) {
+			dProfesor = new Document().append(PROFESOR_NOMBRE, profesor.getNombre()).append(PROFESOR_CORREO, profesor.getCorreo());
+		} else {
+			dProfesor = new Document().append(PROFESOR_NOMBRE, profesor.getNombre()).append(PROFESOR_CORREO, profesor.getCorreo()).append(PROFESOR_TELEFONO, profesor.getTelefono());
+		}
+		
+		return dProfesor;
+	}
+
+	public static Profesor obtenerProfesorDesdeDocumento(Document documentoProfesor) {
+
+		if (documentoProfesor == null)
+			return null;
+
+		Document dProfesor = (Document) documentoProfesor;
+		String nombre = dProfesor.getString(PROFESOR_NOMBRE);
+		String correo = dProfesor.getString(PROFESOR_CORREO);
+		String telefono = dProfesor.getString(PROFESOR_TELEFONO);
+		
+		
+		if (telefono == null) {
+			return new Profesor(nombre, correo);
+		} else {
+			return new Profesor(nombre, correo, telefono);
+		}
+
+	}
+
 }

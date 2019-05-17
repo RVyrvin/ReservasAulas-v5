@@ -38,7 +38,7 @@ public class ControladorAddProfesor {
 			Profesor profesor;
 			
 			if (tfTelefono.getText().trim().equals("")) {
-				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText(), null);
+				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText());
 			} else {
 				profesor = new Profesor(tfNombre.getText(), tfCorreo.getText(), tfTelefono.getText());
 			}
