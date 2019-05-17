@@ -10,9 +10,10 @@ import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Aula;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Profesor;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservasaulas.modelo.dominio.permanencia.Permanencia;
-import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Aulas;
-import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Profesores;
-import org.iesalandalus.programacion.reservasaulas.modelo.ficheros.dao.Reservas;
+import org.iesalandalus.programacion.reservasaulas.modelo.mongodb.dao.Aulas;
+import org.iesalandalus.programacion.reservasaulas.modelo.mongodb.dao.Profesores;
+import org.iesalandalus.programacion.reservasaulas.modelo.mongodb.dao.Reservas;
+import org.iesalandalus.programacion.reservasaulas.modelo.mongodb.utilidades.MongoDB;
 
 public class ModeloReservasAulas implements IModeloReservasAulas {
 
@@ -24,6 +25,16 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 		this.aulas = new Aulas();
 		this.profesores = new Profesores();
 		this.reservas = new Reservas();
+	}
+	
+	@Override
+	public void comenzar() {
+		MongoDB.establecerConexion();		
+	}
+	
+	@Override
+	public void terminar() {
+		MongoDB.cerrarCliente();		
 	}
 
 	
@@ -57,7 +68,7 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 	public void borrarAula(Aula aula) throws OperationNotSupportedException {
 		aulas.borrar(aula);
 	}
-	
+	/*
 	@Override
 	public void leerAulas() {
 		aulas.leer();
@@ -67,6 +78,7 @@ public class ModeloReservasAulas implements IModeloReservasAulas {
 	public void escribirAulas() {
 		aulas.escribir();
 	}
+	*/
 	
 	
 	// profesores

@@ -148,7 +148,6 @@ public class ControladorVentanaPrincipal {
 
 	@FXML
 	void miSalir(ActionEvent event) {
-		System.out.println("qwe");
 		if (Dialogos.mostrarDialogoConfirmacion("Salir", "¿Estás seguro de que quieres salir de la aplicación?",
 				null)) {
 			controladorMVC.salir();
